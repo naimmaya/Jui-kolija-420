@@ -1,48 +1,57 @@
 const loveBtn = document.getElementById("loveBtn");
 const popup = document.getElementById("popup");
 
+
+// ================================
+// CLICK BUTTON
+// ================================
+
 loveBtn.addEventListener("click", () => {
+
   popup.classList.add("show");
 
-  heartBurst();
-  sparkleBurst();
+  heartExplosion();
+  sparkleExplosion();
+  rosePetals();
+  butterflies();
 
   setTimeout(() => {
     popup.classList.remove("show");
-  }, 3500);
+  }, 4000);
+
 });
 
 
-/* =========================
-   HEART BURST
-========================= */
+// ================================
+// HEART EXPLOSION
+// ================================
 
-function heartBurst() {
+function heartExplosion() {
 
-  for (let i = 0; i < 35; i++) {
+  for (let i = 0; i < 45; i++) {
 
     const heart = document.createElement("div");
 
-    heart.innerHTML =
-      Math.random() > 0.35 ? "♥" : "❤";
+    heart.textContent =
+      Math.random() > 0.25 ? "♥" : "❤";
 
     heart.style.position = "fixed";
     heart.style.left = "50%";
-    heart.style.top = "48%";
+    heart.style.top = "45%";
 
     heart.style.zIndex = "9999";
     heart.style.pointerEvents = "none";
 
     heart.style.color =
-      Math.random() > 0.5
-        ? "#ff2b9a"
+      Math.random() > .5
+        ? "#ff168f"
         : "#ff9bdd";
 
     heart.style.fontSize =
-      (12 + Math.random() * 25) + "px";
+      (14 + Math.random() * 25) + "px";
 
     heart.style.textShadow =
-      "0 0 8px #ff008c, 0 0 18px #ff008c";
+      "0 0 8px #ff008c, 0 0 22px #ff008c";
 
     document.body.appendChild(heart);
 
@@ -50,7 +59,7 @@ function heartBurst() {
       Math.random() * Math.PI * 2;
 
     const distance =
-      100 + Math.random() * 350;
+      100 + Math.random() * 420;
 
     const x =
       Math.cos(angle) * distance;
@@ -65,15 +74,14 @@ function heartBurst() {
       [
         {
           transform:
-            "translate(-50%, -50%) scale(0) rotate(0deg)",
+            "translate(-50%,-50%) scale(0)",
           opacity: 0
         },
 
         {
           transform:
-            "translate(-50%, -50%) scale(1.2)",
-          opacity: 1,
-          offset: 0.15
+            "translate(-50%,-50%) scale(1.3)",
+          opacity: 1
         },
 
         {
@@ -82,65 +90,64 @@ function heartBurst() {
               calc(-50% + ${x}px),
               calc(-50% + ${y}px)
             )
-            scale(.4)
-            rotate(${rotate}deg)`,
+            rotate(${rotate}deg)
+            scale(.3)`,
 
           opacity: 0
         }
       ],
       {
-        duration: 1800 + Math.random() * 1400,
+        duration:
+          1600 + Math.random() * 1800,
 
         easing:
           "cubic-bezier(.17,.67,.25,1)"
       }
     );
 
-    setTimeout(() => {
-      heart.remove();
-    }, 3400);
+    setTimeout(() => heart.remove(), 3600);
   }
 }
 
 
-/* =========================
-   SPARKLE BURST
-========================= */
+// ================================
+// SPARKLES
+// ================================
 
-function sparkleBurst() {
+function sparkleExplosion() {
 
-  for (let i = 0; i < 45; i++) {
+  for (let i = 0; i < 55; i++) {
 
-    const sparkle =
-      document.createElement("div");
+    const star = document.createElement("div");
 
-    sparkle.innerHTML = "✦";
+    star.textContent =
+      Math.random() > .5 ? "✦" : "✧";
 
-    sparkle.style.position = "fixed";
-    sparkle.style.left = "50%";
-    sparkle.style.top = "48%";
+    star.style.position = "fixed";
+    star.style.left = "50%";
+    star.style.top = "45%";
 
-    sparkle.style.zIndex = "9998";
-    sparkle.style.pointerEvents = "none";
+    star.style.zIndex = "9998";
+    star.style.pointerEvents = "none";
 
-    sparkle.style.color =
+    star.style.color =
       Math.random() > .5
         ? "#ffffff"
-        : "#ff62bd";
+        : "#ff65bd";
 
-    sparkle.style.fontSize =
-      (6 + Math.random() * 12) + "px";
+    star.style.fontSize =
+      (7 + Math.random() * 14) + "px";
 
-    sparkle.style.textShadow =
-      "0 0 10px #ff4db8";
+    star.style.textShadow =
+      "0 0 12px #ff4db8";
 
-    document.body.appendChild(sparkle);
+    document.body.appendChild(star);
 
     const angle =
       Math.random() * Math.PI * 2;
 
     const distance =
-      120 + Math.random() * 400;
+      100 + Math.random() * 450;
 
     const x =
       Math.cos(angle) * distance;
@@ -148,17 +155,17 @@ function sparkleBurst() {
     const y =
       Math.sin(angle) * distance;
 
-    sparkle.animate(
+    star.animate(
       [
         {
           transform:
-            "translate(-50%, -50%) scale(0)",
+            "translate(-50%,-50%) scale(0)",
           opacity: 0
         },
 
         {
           transform:
-            "translate(-50%, -50%) scale(1)",
+            "translate(-50%,-50%) scale(1.2)",
           opacity: 1
         },
 
@@ -174,53 +181,182 @@ function sparkleBurst() {
         }
       ],
       {
-        duration: 1300 + Math.random() * 1200,
+        duration:
+          1000 + Math.random() * 1700,
+
         easing: "ease-out"
       }
     );
 
-    setTimeout(() => {
-      sparkle.remove();
-    }, 2800);
+    setTimeout(() => star.remove(), 3000);
   }
 }
 
 
-/* =========================
-   3D HEART TILT
-========================= */
+// ================================
+// ROSE PETALS
+// ================================
 
-const heart = document.querySelector(".heart-3d");
+function rosePetals() {
 
-document.addEventListener("pointermove", (e) => {
+  for (let i = 0; i < 22; i++) {
 
-  if (!heart) return;
+    const petal = document.createElement("div");
 
-  const x =
-    (e.clientX / window.innerWidth - 0.5) * 12;
+    petal.textContent = "🌹";
 
-  const y =
-    (e.clientY / window.innerHeight - 0.5) * -12;
+    petal.style.position = "fixed";
 
-  heart.style.transform =
-    `rotateY(${x}deg) rotateX(${y}deg)`;
-});
+    petal.style.left =
+      Math.random() * 100 + "vw";
+
+    petal.style.top = "-50px";
+
+    petal.style.zIndex = "9997";
+    petal.style.pointerEvents = "none";
+
+    petal.style.fontSize =
+      (14 + Math.random() * 18) + "px";
+
+    const duration =
+      3500 + Math.random() * 3000;
+
+    const rotate =
+      Math.random() * 720 - 360;
+
+    const drift =
+      Math.random() * 220 - 110;
+
+    petal.animate(
+      [
+        {
+          transform:
+            "translateY(0) rotate(0deg)",
+          opacity: 0
+        },
+
+        {
+          opacity: 1
+        },
+
+        {
+          transform:
+            `translate(
+              ${drift}px,
+              110vh
+            )
+            rotate(${rotate}deg)`,
+
+          opacity: 0
+        }
+      ],
+      {
+        duration: duration,
+        easing: "ease-in-out"
+      }
+    );
+
+    document.body.appendChild(petal);
+
+    setTimeout(() => petal.remove(), duration + 100);
+  }
+}
 
 
-/* =========================
-   TOUCH EFFECT
-========================= */
+// ================================
+// BUTTERFLIES
+// ================================
 
-document.addEventListener("touchstart", (e) => {
+function butterflies() {
 
-  if (!e.touches[0]) return;
+  for (let i = 0; i < 8; i++) {
 
-  const x = e.touches[0].clientX;
-  const y = e.touches[0].clientY;
+    const butterfly =
+      document.createElement("div");
 
-  createTouchHeart(x, y);
+    butterfly.textContent = "🦋";
 
-});
+    butterfly.style.position = "fixed";
+
+    butterfly.style.left =
+      Math.random() * 90 + 5 + "vw";
+
+    butterfly.style.top =
+      (30 + Math.random() * 50) + "vh";
+
+    butterfly.style.zIndex = "9996";
+    butterfly.style.pointerEvents = "none";
+
+    butterfly.style.fontSize =
+      (18 + Math.random() * 16) + "px";
+
+    const x =
+      Math.random() * 160 - 80;
+
+    const y =
+      Math.random() * 300 - 150;
+
+    butterfly.animate(
+      [
+        {
+          transform:
+            "translate(0,0) scale(.4)",
+          opacity: 0
+        },
+
+        {
+          transform:
+            "translate(0,-30px) scale(1)",
+          opacity: 1
+        },
+
+        {
+          transform:
+            `translate(${x}px,${y}px)
+             scale(.7)
+             rotate(15deg)`,
+
+          opacity: 0
+        }
+      ],
+      {
+        duration:
+          2500 + Math.random() * 2000,
+
+        easing: "ease-in-out"
+      }
+    );
+
+    document.body.appendChild(butterfly);
+
+    setTimeout(
+      () => butterfly.remove(),
+      5000
+    );
+  }
+}
+
+
+// ================================
+// TOUCH HEART
+// ================================
+
+document.addEventListener(
+  "touchstart",
+  (event) => {
+
+    const touch = event.touches[0];
+
+    if (!touch) return;
+
+    createTouchHeart(
+      touch.clientX,
+      touch.clientY
+    );
+
+  },
+  { passive: true }
+);
 
 
 function createTouchHeart(x, y) {
@@ -228,17 +364,20 @@ function createTouchHeart(x, y) {
   const heart =
     document.createElement("div");
 
-  heart.innerHTML = "♥";
+  heart.textContent = "♥";
 
   heart.style.position = "fixed";
+
   heart.style.left = x + "px";
   heart.style.top = y + "px";
 
   heart.style.zIndex = "9999";
+
   heart.style.pointerEvents = "none";
 
   heart.style.color = "#ff42ad";
-  heart.style.fontSize = "24px";
+
+  heart.style.fontSize = "25px";
 
   heart.style.textShadow =
     "0 0 12px #ff008c";
@@ -249,29 +388,57 @@ function createTouchHeart(x, y) {
     [
       {
         transform:
-          "translate(-50%, -50%) scale(.3)",
+          "translate(-50%,-50%) scale(.2)",
         opacity: 0
       },
 
       {
         transform:
-          "translate(-50%, -90px) scale(1.3)",
+          "translate(-50%,-90px) scale(1.3)",
         opacity: 1
       },
 
       {
         transform:
-          "translate(-50%, -180px) scale(.5)",
+          "translate(-50%,-190px) scale(.4)",
         opacity: 0
       }
     ],
     {
-      duration: 1200,
+      duration: 1300,
       easing: "ease-out"
     }
   );
 
-  setTimeout(() => {
-    heart.remove();
-  }, 1300);
+  setTimeout(
+    () => heart.remove(),
+    1400
+  );
 }
+
+
+// ================================
+// MOUSE 3D HEART TILT
+// ================================
+
+const heart3D =
+  document.querySelector(".heart-3d");
+
+document.addEventListener(
+  "pointermove",
+  (event) => {
+
+    if (!heart3D) return;
+
+    const x =
+      (event.clientX /
+        window.innerWidth - .5) * 14;
+
+    const y =
+      (event.clientY /
+        window.innerHeight - .5) * -14;
+
+    heart3D.style.transform =
+      `rotateY(${x}deg) rotateX(${y}deg)`;
+  }
+);
