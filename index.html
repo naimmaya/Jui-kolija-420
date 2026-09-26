@@ -1,54 +1,111 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>For You ❤️</title>
+  <title>জুই কলিজা ❤️</title>
 
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <div class="stars"></div>
+  <!-- 3D Background -->
+  <div class="space"></div>
 
-  <main class="container">
+  <!-- Floating particles -->
+  <div class="particles"></div>
 
-    <div class="heart-wrap">
-      <div class="heart">♥</div>
-    </div>
+  <main class="scene">
 
-    <h1>For You ❤️</h1>
+    <!-- 3D Heart -->
+    <section class="hero">
 
-    <p class="subtitle">
-      You are the most beautiful part of my story.
-    </p>
+      <div class="heart-3d">
+        <div class="heart-glow"></div>
+        <div class="heart-shape">♥</div>
 
-    <div class="message-card">
-      <div class="card-heart">♡</div>
+        <div class="heart-ring ring-1"></div>
+        <div class="heart-ring ring-2"></div>
+        <div class="heart-ring ring-3"></div>
+      </div>
 
-      <h2>My Message</h2>
+      <h1>জুই কলিজা</h1>
+
+      <div class="love-title">
+        ❤️ তোমায়াই অনেক ভালোবাসি ❤️
+      </div>
+
+      <p class="small-text">
+        তুমি আমার হৃদয়ের সবচেয়ে সুন্দর মানুষ 🥰
+      </p>
+
+    </section>
+
+
+    <!-- Glass 3D Message Card -->
+    <section class="message-card">
+
+      <div class="card-top">
+        <span>♥</span>
+        <h2>My Message</h2>
+        <span>♥</span>
+      </div>
+
+      <div class="card-line"></div>
 
       <p>
-        Some people come into our lives and make everything
-        a little more beautiful. You are one of those people.
+        জুই কলিজা, তুমি শুধু আমার জীবনের
+        একটি অংশ নও—
+        <br><br>
+
+        তুমি আমার হাসির কারণ,
+        আমার আনন্দের কারণ,
+        আমার প্রতিটি সুন্দর মুহূর্তের কারণ। ❤️
       </p>
 
-      <p class="love-text">
-        Forever & Always ❤️
+      <p class="special">
+        তোমায়াই অনেক ভালোবাসি
+        <br>
+        ❤️ জুই কলিজা ❤️
       </p>
-    </div>
 
-    <button id="loveBtn">Click Me ❤️</button>
+      <div class="infinity">∞</div>
 
-    <div id="popup" class="popup">
-      <span>💗</span>
-      <p>You are special to me ❤️</p>
+    </section>
+
+
+    <!-- Button -->
+    <button id="loveBtn" class="love-button">
+      <span>❤️</span>
+      Click Me
+      <span>❤️</span>
+    </button>
+
+
+    <div class="forever">
+      ♥ Forever & Always ♥
     </div>
 
   </main>
 
+
+  <!-- Click Popup -->
+  <div id="popup" class="popup">
+
+    <div class="popup-heart">💗</div>
+
+    <h2>জুই কলিজা ❤️</h2>
+
+    <p>
+      তোমায়াই অনেক ভালোবাসি 🥰
+    </p>
+
+  </div>
+
+
+  <!-- JavaScript -->
   <script src="script.js"></script>
 
 </body>
