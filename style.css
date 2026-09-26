@@ -1,0 +1,308 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  background:
+    radial-gradient(circle at center, #3b082f 0%, #18051b 45%, #050008 100%);
+  color: white;
+}
+
+/* Background stars */
+.stars,
+.stars::before,
+.stars::after {
+  position: fixed;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+}
+
+.stars {
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,.8) 1px, transparent 1px),
+    radial-gradient(circle, rgba(255,105,180,.7) 1px, transparent 1px);
+  background-size: 55px 55px, 85px 85px;
+  animation: starsMove 12s linear infinite;
+}
+
+.stars::before {
+  background-image:
+    radial-gradient(circle, #fff 1px, transparent 1px);
+  background-size: 110px 110px;
+  opacity: .35;
+}
+
+@keyframes starsMove {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-110px);
+  }
+}
+
+/* Main */
+.container {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 25px;
+  text-align: center;
+}
+
+/* Heart */
+.heart-wrap {
+  position: relative;
+  width: 190px;
+  height: 190px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 15px;
+}
+
+.heart-wrap::before,
+.heart-wrap::after {
+  content: "";
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: rgba(255, 0, 130, .18);
+  filter: blur(30px);
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+.heart-wrap::after {
+  width: 90px;
+  height: 90px;
+  background: rgba(255, 80, 190, .35);
+  filter: blur(20px);
+}
+
+.heart {
+  position: relative;
+  z-index: 2;
+
+  font-size: 145px;
+  line-height: 1;
+
+  color: #ff2b9a;
+
+  text-shadow:
+    0 0 10px #ff2b9a,
+    0 0 25px #ff2b9a,
+    0 0 50px #ff0088,
+    0 0 90px #ff0088;
+
+  animation: heartbeat 1.15s infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+
+  15% {
+    transform: scale(1.15);
+  }
+
+  30% {
+    transform: scale(1);
+  }
+
+  45% {
+    transform: scale(1.1);
+  }
+
+  60% {
+    transform: scale(1);
+  }
+}
+
+@keyframes glow {
+  from {
+    transform: scale(.8);
+    opacity: .5;
+  }
+
+  to {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+/* Heading */
+h1 {
+  font-size: 42px;
+  margin-bottom: 10px;
+
+  color: #fff;
+
+  text-shadow:
+    0 0 10px #ff4db8,
+    0 0 25px #ff0088;
+}
+
+.subtitle {
+  max-width: 500px;
+  color: #ffc9e8;
+  font-size: 16px;
+  margin-bottom: 25px;
+}
+
+/* Card */
+.message-card {
+  width: min(90%, 420px);
+
+  padding: 25px 22px;
+
+  border: 1px solid rgba(255, 100, 190, .45);
+  border-radius: 22px;
+
+  background: rgba(255, 255, 255, .06);
+  backdrop-filter: blur(12px);
+
+  box-shadow:
+    0 0 25px rgba(255, 0, 140, .15),
+    inset 0 0 20px rgba(255, 255, 255, .03);
+}
+
+.card-heart {
+  font-size: 35px;
+  color: #ff4db8;
+
+  text-shadow:
+    0 0 15px #ff0088;
+}
+
+.message-card h2 {
+  margin: 8px 0 12px;
+  color: #ffb9df;
+}
+
+.message-card p {
+  color: #f8dbea;
+  line-height: 1.6;
+}
+
+.love-text {
+  margin-top: 15px;
+  font-weight: bold;
+  color: #ff6fbd !important;
+}
+
+/* Button */
+button {
+  margin-top: 22px;
+
+  padding: 13px 30px;
+
+  border: 1px solid #ff54b5;
+  border-radius: 50px;
+
+  background: linear-gradient(135deg, #ff1493, #b00070);
+  color: white;
+
+  font-size: 16px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 0 15px rgba(255, 20, 147, .5);
+
+  transition: .3s;
+}
+
+button:hover {
+  transform: scale(1.08);
+
+  box-shadow:
+    0 0 25px rgba(255, 20, 147, .8);
+}
+
+/* Popup */
+.popup {
+  position: fixed;
+  left: 50%;
+  bottom: 30px;
+
+  transform: translate(-50%, 100px);
+
+  width: min(85%, 350px);
+
+  padding: 15px;
+
+  border-radius: 15px;
+
+  background: rgba(70, 0, 45, .92);
+  border: 1px solid #ff54b5;
+
+  box-shadow:
+    0 0 25px rgba(255, 0, 140, .5);
+
+  opacity: 0;
+
+  transition: .5s;
+}
+
+.popup.show {
+  transform: translate(-50%, 0);
+  opacity: 1;
+}
+
+.popup span {
+  font-size: 25px;
+}
+
+.popup p {
+  margin-top: 5px;
+  color: #ffd5ec;
+}
+
+/* Mobile */
+@media (max-width: 500px) {
+
+  .heart-wrap {
+    width: 150px;
+    height: 150px;
+  }
+
+  .heart {
+    font-size: 115px;
+  }
+
+  h1 {
+    font-size: 32px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+
+  .message-card {
+    padding: 20px 17px;
+  }
+}
