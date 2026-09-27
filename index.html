@@ -1,93 +1,90 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>জুই কলিজা ❤️</title>
-
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>জুই কলিজা ❤️</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+    <!-- ব্যাকগ্রাউন্ড মিউজিক (আপনার পছন্দমতো লিংক বসাতে পারেন) -->
+    <audio id="bg-music" loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-tenderness.mp3" type="audio/mp3">
+    </audio>
 
-<div class="stars"></div>
+    <!-- ফ্লোটিং হার্ট কন্টেইনার -->
+    <div class="floating-hearts" id="floatingHearts"></div>
 
-<main class="container">
-
-  <!-- 3D HEART -->
-  <section class="hero">
-
-    <div class="heart-3d">
-      ❤️
+    <!-- পাসওয়ার্ড প্রোটেকশন স্ক্রিন -->
+    <div id="lockScreen" class="lock-screen">
+        <div class="lock-box">
+            <h2>🔒 গোপন প্রবেশদ্বার</h2>
+            <p>আমাদের বিশেষ দিনটির সংখ্যাটি লিখুন (যেমন: DDMM)</p>
+            <input type="password" id="passInput" placeholder="কোড লিখুন...">
+            <button onclick="checkPassword()">প্রবেশ করুন</button>
+            <p id="errorMsg" class="error-msg"></p>
+        </div>
     </div>
 
-    <h1>জুই কলিজা</h1>
+    <!-- মূল ওয়েবসাইট কন্টেন্ট -->
+    <div id="mainContent" class="main-content" style="display: none;">
+        <div class="top-bar">
+            <span class="badge">✨ জুই কলিজা ❤️</span>
+            <button id="musicToggle" onclick="toggleMusic()">🎵 মিউজিক অফ</button>
+        </div>
 
-    <h2>💗 তোমাকে অনেক ভালোবাসি 💗</h2>
+        <div class="header-section">
+            <div class="heart-3d" id="heart3d">❤️</div>
+            <h1>জুই কলিজা</h1>
+            <p class="subtitle">❤️ তোমাকে অনেক ভালোবাসি</p>
+            <p class="desc">তুমি আমার কাছে অনেক স্পেশাল 🥰</p>
+        </div>
 
-    <p>তুমি আমার কাছে অনেক স্পেশাল 🥰</p>
+        <!-- রিয়েল-টাইম রিলেশনশিপ কাউন্টার -->
+        <div class="counter-card">
+            <h3>⏳ আমাদের ভালোবাসার সময়</h3>
+            <div id="counter" class="counter-grid"></div>
+        </div>
 
-  </section>
+        <!-- মেমোরেবল টাইমলাইন / মেমোরি -->
+        <div class="timeline-card">
+            <h3>🌟 আমাদের স্মৃতি</h3>
+            <div class="timeline-item">
+                <p><strong>আমাদের প্রথম কথা:</strong> একটি সুন্দর সূচনার মুহূর্ত ❤️</p>
+            </div>
+            <div class="timeline-item">
+                <p><strong>বিশেষ দিন:</strong> সারजीवन একসাথে থাকার প্রত্যয় ♾️</p>
+            </div>
+        </div>
 
-  <!-- MESSAGE CARD -->
-  <section class="card">
+        <div class="message-card">
+            <h2><span class="mini-heart">❤️</span> My Message <span class="mini-heart">❤️</span></h2>
+            <p class="message-text">
+                জুই কলিজা, তুমি শুধু আমার জীবনের একটি অংশ নও—তুমি আমার হাসির কারণ, আমার আনন্দের কারণ এবং আমার প্রতিটি সুন্দর মুহূর্তের কারণ! ❤️
+            </p>
+            <p class="love-note">তোমাকে অনেক ভালোবাসি</p>
+            <div class="infinity-symbol">♾️</div>
+        </div>
 
-    <h2>💗 My Message 💗</h2>
-
-    <div class="line"></div>
-
-    <p>
-      জুই কলিজা, তুমি শুধু আমার জীবনের
-      একটি অংশ নও—তুমি আমার হাসির কারণ,
-      আমার আনন্দের কারণ এবং আমার প্রতিটি
-      সুন্দর মুহূর্তের কারণ! ❤️
-    </p>
-
-    <h3>তোমাকে অনেক ভালোবাসি</h3>
-
-    <div class="infinity">∞</div>
-
-  </section>
-
-  <!-- BUTTON -->
-  <button class="love-button" id="loveBtn">
-    ❤️ Click Me ❤️
-  </button>
-
-  <p class="forever">♥ Forever & Always ♥</p>
-
-</main>
-
-<!-- POPUP -->
-<div class="popup" id="popup">
-
-  <div class="popup-box">
-
-    <button class="close-btn" id="closeBtn">
-      ×
-    </button>
-
-    <div class="popup-heart">💗</div>
-
-    <h2>জুই কলিজা ❤️</h2>
-
-    <div class="photo-frame">
-      <img src="jui.jpg" alt="জুই কলিজা">
+        <div class="action-section">
+            <button class="click-me-btn" onclick="openModal()">
+                ❤️ Click Me ❤️
+            </button>
+        </div>
     </div>
 
-    <p>তোমাকে অনেক ভালোবাসি 🥰</p>
+    <!-- পপআপ মোডাল -->
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2>জুই কলিজা ❤️</h2>
+            <div class="image-wrapper">
+                <img src="jui.jpg" alt="Jui Kolija">
+            </div>
+            <p class="modal-footer-text">তোমাকে অনেক ভালোবাসি 🥰</p>
+        </div>
+    </div>
 
-    <h3>তুমি আমার কাছে স্পেশাল ❤️</h3>
-
-    <p class="forever">❤️ Forever & Always ❤️</p>
-
-  </div>
-
-</div>
-
-<script src="script.js"></script>
-
+    <script src="script.js"></script>
 </body>
 </html>
