@@ -7,31 +7,23 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- ব্যাকগ্রাউন্ড মিউজিক (আপনার পছন্দমতো লিংক বসাতে পারেন) -->
+    <!-- ব্যাকগ্রাউন্ড মিউজিক -->
     <audio id="bg-music" loop>
         <source src="https://www.bensound.com/bensound-music/bensound-tenderness.mp3" type="audio/mp3">
     </audio>
 
-    <!-- ফ্লোটিং হার্ট কন্টেইনার -->
-    <div class="floating-hearts" id="floatingHearts"></div>
-
-    <!-- পাসওয়ার্ড প্রোটেকশন স্ক্রিন -->
-    <div id="lockScreen" class="lock-screen">
-        <div class="lock-box">
-            <h2>🔒 গোপন প্রবেশদ্বার</h2>
-            <p>আমাদের বিশেষ দিনটির সংখ্যাটি লিখুন (যেমন: DDMM)</p>
-            <input type="text" id="passInput" placeholder="নাম লিখুন...">
-
-            <button onclick="checkPassword()">প্রবেশ করুন</button>
-            <p id="errorMsg" class="error-msg"></p>
-        </div>
-    </div>
+    <!-- লাভ রেইন কন্টেইনার -->
+    <div class="rain-container" id="rainContainer"></div>
 
     <!-- মূল ওয়েবসাইট কন্টেন্ট -->
-    <div id="mainContent" class="main-content" style="display: none;">
+    <div id="mainContent" class="main-content">
         <div class="top-bar">
             <span class="badge">✨ জুই কলিজা ❤️</span>
-            <button id="musicToggle" onclick="toggleMusic()">🎵 মিউজিক অফ</button>
+            <!-- স্টাইলিশ মিউজিক প্লেয়ার বাটন -->
+            <div class="music-player-btn" onclick="toggleMusic()">
+                <div class="vinyl-disk" id="vinylDisk">🎵</div>
+                <span id="musicText">মিউজিক অন</span>
+            </div>
         </div>
 
         <div class="header-section">
@@ -47,15 +39,45 @@
             <div id="counter" class="counter-grid"></div>
         </div>
 
-        <!-- মেমোরেবল টাইমলাইন / মেমোরি -->
+        <!-- ডিজিটাল লাভ সার্টিফিকেট (নতুন প্রিমিয়াম ফিচার) -->
+        <div class="certificate-card">
+            <div class="cert-border">
+                <h3>📜 অফিশিয়াল লাভ সার্টিফিকেট</h3>
+                <p class="cert-to">এই সার্টিফিকেটটি প্রদান করা হলো:</p>
+                <h2 class="cert-name">জুই কলিজা ❤️</h2>
+                <p class="cert-desc">যিনি আমার জীবনের একমাত্র সুখ, শান্তি ও সর্বকালের সেরা ভালোবাসার অধিকারিণী। আমাদের এই ভালোবাসার কোনো শেষ নেই। ♾️</p>
+                <div class="cert-footer"><span>স্বাক্ষর: আপনার ভালোবাসার মানুষ 💖</span></div>
+            </div>
+        </div>
+
+        <!-- মেমোরেবল টাইমলাইন -->
         <div class="timeline-card">
             <h3>🌟 আমাদের স্মৃতি</h3>
             <div class="timeline-item">
                 <p><strong>আমাদের প্রথম কথা:</strong> একটি সুন্দর সূচনার মুহূর্ত ❤️</p>
             </div>
             <div class="timeline-item">
-                <p><strong>বিশেষ দিন:</strong> সারजीवन একসাথে থাকার প্রত্যয় ♾️</p>
+                <p><strong>বিশেষ দিন:</strong> সারাজীবন একসাথে থাকার প্রত্যয় ♾️</p>
             </div>
+        </div>
+
+        <!-- মিনি লাভ কুইজ (নতুন ইন্টারঅ্যাক্টিভ ফিচার) -->
+        <div class="quiz-card">
+            <h3>❓ ছোট্ট একটি প্রশ্ন</h3>
+            <p id="quizQuestion">আমাকে কতটা ভালোবাসো?</p>
+            <div class="quiz-options" id="quizOptions">
+                <button onclick="answerQuiz(1)">সমুদ্রের চেয়ে বেশি 🌊</button>
+                <button onclick="answerQuiz(2)">আকাশের তারার মতো অসীম ✨</button>
+                <button onclick="answerQuiz(3)">প্রাণের চেয়েও বেশি 🥰</button>
+            </div>
+            <p id="quizResult" class="quiz-result"></p>
+        </div>
+
+        <!-- সারপ্রাইজ লাভ কোট বক্স -->
+        <div class="quote-card">
+            <h3>💌 আজকের রোমান্টিক কথা</h3>
+            <p id="loveQuote">"তুমি আমার হাসির কারণ, আমার আনন্দের কারণ! ❤️"</p>
+            <button onclick="changeQuote()">অন্য লাইন দেখুন ✨</button>
         </div>
 
         <div class="message-card">
