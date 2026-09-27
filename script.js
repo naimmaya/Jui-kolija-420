@@ -1,8 +1,8 @@
-// ১. পাসওয়ার্ড প্রোটেকশন লজিক (এখানে সিক্রেট কোড হিসেবে "1402" বা আপনার পছন্দমতো সংখ্যা দিতে পারেন)
-const SECRET_CODE = "1402"; 
+// ১. পাসওয়ার্ড প্রোটেকশন লজিক (পাসওয়ার্ড হিসেবে "jui kolija" সেট করা আছে)
+const SECRET_CODE = "jui kolija"; 
 
 function checkPassword() {
-    const inputVal = document.getElementById("passInput").value;
+    const inputVal = document.getElementById("passInput").value.trim().toLowerCase();
     if(inputVal === SECRET_CODE) {
         document.getElementById("lockScreen").style.display = "none";
         document.getElementById("mainContent").style.display = "block";
@@ -14,7 +14,7 @@ function checkPassword() {
         startFloatingHearts();
         startCounter();
     } else {
-        document.getElementById("errorMsg").innerText = "ভুল কোড! আবার চেষ্টা করুন ❌";
+        document.getElementById("errorMsg").innerText = "ভুল পাসওয়ার্ড! আবার চেষ্টা করুন ❌";
     }
 }
 
@@ -51,7 +51,7 @@ function startFloatingHearts() {
     }, 400);
 }
 
-// ৪. রিলেশনশিপ টাইম কাউন্টার (এখানে আপনার সম্পর্কের শুরুর তারিখ দিন: YYYY-MM-DD)
+// ৪. রিলেশনশিপ টাইম কাউন্টার (এখানে সম্পর্কের শুরুর তারিখ দিন: YYYY-MM-DD)
 const startDate = new Date("2025-01-01T00:00:00");
 
 function startCounter() {
