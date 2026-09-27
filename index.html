@@ -15,8 +15,19 @@
     <!-- লাভ রেইন কন্টেইনার -->
     <div class="rain-container" id="rainContainer"></div>
 
-    <!-- মূল ওয়েবসাইট কন্টেন্ট -->
-    <div id="mainContent" class="main-content">
+    <!-- পাসওয়ার্ড প্রটেকশন লক স্ক্রিন (প্রথমে এটি দেখাবে) -->
+    <div id="lockScreen" class="lock-screen">
+        <div class="lock-box">
+            <h2>🔒 গোপন প্রবেশদ্বার</h2>
+            <p>আমাদের বিশেষ দিনটির পাসওয়ার্ডটি লিখুন (যেমন: jui kolija)</p>
+            <input type="text" id="passInput" placeholder="নাম বা পাসওয়ার্ড লিখুন...">
+            <button onclick="checkPassword()">প্রবেশ করুন</button>
+            <p id="errorMsg" class="error-msg"></p>
+        </div>
+    </div>
+
+    <!-- মূল ওয়েবসাইট কন্টেন্ট (সঠিক পাসওয়ার্ড দিলে ওপেন হবে) -->
+    <div id="mainContent" class="main-content" style="display: none;">
         <div class="top-bar">
             <span class="badge">✨ জুই কলিজা ❤️</span>
             <!-- স্টাইলিশ মিউজিক প্লেয়ার বাটন -->
@@ -39,7 +50,7 @@
             <div id="counter" class="counter-grid"></div>
         </div>
 
-        <!-- ডিজিটাল লাভ সার্টিফিকেট (নতুন প্রিমিয়াম ফিচার) -->
+        <!-- ডিজিটাল লাভ সার্টিফিকেট -->
         <div class="certificate-card">
             <div class="cert-border">
                 <h3>📜 অফিশিয়াল লাভ সার্টিফিকেট</h3>
@@ -61,7 +72,7 @@
             </div>
         </div>
 
-        <!-- মিনি লাভ কুইজ (নতুন ইন্টারঅ্যাক্টিভ ফিচার) -->
+        <!-- মিনি লাভ কুইজ -->
         <div class="quiz-card">
             <h3>❓ ছোট্ট একটি প্রশ্ন</h3>
             <p id="quizQuestion">আমাকে কতটা ভালোবাসো?</p>
