@@ -1,57 +1,53 @@
-// ১. পাসওয়ার্ড প্রোটেকশন লজিক (পাসওয়ার্ড হিসেবে "jui kolija" সেট করা আছে)
-const SECRET_CODE = "jui kolija"; 
+// ওয়েবসাইট লোড হওয়ার সাথে সাথেই সব ইফেক্ট চালু হবে
+window.onload = function() {
+    const music = document.getElementById("bg-music");
+    music.play().then(() => {
+        document.querySelector(".music-player-btn").classList.add("playing");
+        document.getElementById("musicText").innerText = "মিউজিক অন";
+    }).catch(e => console.log("Auto-play restricted"));
+    
+    startHeartRain();
+    startCounter();
+};
 
-function checkPassword() {
-    const inputVal = document.getElementById("passInput").value.trim().toLowerCase();
-    if(inputVal === SECRET_CODE) {
-        document.getElementById("lockScreen").style.display = "none";
-        document.getElementById("mainContent").style.display = "block";
-        
-        // মিউজিক প্লে করার চেষ্টা
-        const music = document.getElementById("bg-music");
-        music.play().catch(e => console.log("Auto-play restricted"));
-        
-        startFloatingHearts();
-        startCounter();
-    } else {
-        document.getElementById("errorMsg").innerText = "ভুল পাসওয়ার্ড! আবার চেষ্টা করুন ❌";
-    }
-}
-
-// ২. ব্যাকগ্রাউন্ড মিউজিক টগল
+// ১. ব্যাকগ্রাউন্ড মিউজিক টগল ও ডিস্ক অ্যানিমেশন
 let isPlaying = true;
 function toggleMusic() {
     const music = document.getElementById("bg-music");
-    const btn = document.getElementById("musicToggle");
+    const playerBtn = document.querySelector(".music-player-btn");
+    const musicText = document.getElementById("musicText");
+    
     if(isPlaying) {
         music.pause();
-        btn.innerText = "🔇 মিউজিক অন";
+        playerBtn.classList.remove("playing");
+        musicText.innerText = "মিউজিক অফ";
     } else {
         music.play();
-        btn.innerText = "🎵 মিউজিক অফ";
+        playerBtn.classList.add("playing");
+        musicText.innerText = "মিউজিক অন";
     }
     isPlaying = !isPlaying;
 }
 
-// ৩. ফ্লোটিং হার্ট অ্যানিমেশন জেনারেটর
-function startFloatingHearts() {
-    const container = document.getElementById("floatingHearts");
+// ২. লাভ রেইন (উপর থেকে নিচে হার্ট পড়ার ইফেক্ট)
+function startHeartRain() {
+    const container = document.getElementById("rainContainer");
     setInterval(() => {
         const heart = document.createElement("div");
-        heart.classList.add("float-heart");
+        heart.classList.add("raindrop-heart");
         heart.innerHTML = "❤️";
         heart.style.left = Math.random() * 100 + "vw";
-        heart.style.fontSize = (Math.random() * 15 + 10) + "px";
-        heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+        heart.style.fontSize = (Math.random() * 12 + 10) + "px";
+        heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
         container.appendChild(heart);
         
         setTimeout(() => {
             heart.remove();
         }, 6000);
-    }, 400);
+    }, 300);
 }
 
-// ৪. রিলেশনশিপ টাইম কাউন্টার (এখানে সম্পর্কের শুরুর তারিখ দিন: YYYY-MM-DD)
+// ৩. রিলেশনশিপ টাইম কাউন্টার (সম্পর্কের শুরুর তারিখ: YYYY-MM-DD)
 const startDate = new Date("2025-01-01T00:00:00");
 
 function startCounter() {
@@ -77,7 +73,33 @@ function startCounter() {
     setInterval(update, 1000);
 }
 
-// ৫. পপআপ মোডাল কন্ট্রোল
+// ৪. মিনি লাভ কুইজ লজিক
+function answerQuiz(option) {
+    const resultText = document.getElementById("quizResult");
+    if(option === 1) {
+        resultText.innerText = "সঠিক উত্তর! সমুদ্রের চেয়েও গভীর আমাদের ভালোবাসা 🌊❤️";
+    } else if(option === 2) {
+        resultText.innerText = "একদম ঠিক! আকাশের তারার মতো আমাদের ভালোবাসা অন্তহীন ✨💖";
+    } else {
+        resultText.innerText = "সবচেয়ে সুন্দর উত্তর! প্রাণের চেয়েও বেশি ভালোবাসি 🥰♾️";
+    }
+}
+
+// ৫. রেন্ডম লাভ কোট জেনারেটর
+const quotes = [
+    "\"তুমি আমার হাসির কারণ, আমার আনন্দের কারণ! ❤️\"",
+    "\"তোমার সাথে কাটানো প্রতিটি মুহূর্ত আমার জীবনের সেরা মুহূর্ত। 🌸\"",
+    "\"পৃথিবীর সবুজের চেয়েও তোমার মুখের হাসি আমার কাছে বেশি সুন্দর। ✨\"",
+    "\"সারা জীবন এভাবেই তোমার হাত ধরে থাকতে চাই। ♾️\"",
+    "\"আমার প্রতিটি নিঃশ্বাসে শুধু তোমার নাম জড়িয়ে আছে। 🥰\""
+];
+
+function changeQuote() {
+    const randomIndex = Math.floor(Math.random() * quotes.length);
+    document.getElementById("loveQuote").innerText = quotes[randomIndex];
+}
+
+// ৬. পপআপ মোডাল কন্ট্রোল
 function openModal() {
     document.getElementById("imageModal").style.display = "flex";
 }
@@ -86,7 +108,6 @@ function closeModal() {
     document.getElementById("imageModal").style.display = "none";
 }
 
-// বাইরে ক্লিক করলে মোডাল বন্ধ হবে
 window.onclick = function(event) {
     const modal = document.getElementById("imageModal");
     if (event.target == modal) {
@@ -94,7 +115,7 @@ window.onclick = function(event) {
     }
 }
 
-// ৬. 3D হার্ট টিল্ট এফেক্ট
+// ৭. 3D হার্ট টিল্ট এফেক্ট
 const heart3d = document.getElementById("heart3d");
 document.addEventListener("pointermove", (event) => {
     if (!heart3d) return;
