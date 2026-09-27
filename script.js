@@ -1,135 +1,104 @@
-const loveBtn = document.getElementById("loveBtn");
-const popup = document.getElementById("popup");
-const closeBtn = document.getElementById("closeBtn");
+// ১. পাসওয়ার্ড প্রোটেকশন লজিক (এখানে সিক্রেট কোড হিসেবে "1402" বা আপনার পছন্দমতো সংখ্যা দিতে পারেন)
+const SECRET_CODE = "1402"; 
 
-// CLICK BUTTON
-loveBtn.addEventListener("click", () => {
-  popup.classList.add("show");
-
-  heartExplosion();
-  sparkleExplosion();
-  rosePetals();
-  butterflies();
-});
-
-// CLOSE POPUP
-closeBtn.addEventListener("click", () => {
-  popup.classList.remove("show");
-});
-
-// CLICK OUTSIDE
-popup.addEventListener("click", (event) => {
-  if (event.target === popup) {
-    popup.classList.remove("show");
-  }
-});
-
-// HEART EXPLOSION
-function heartExplosion() {
-  for (let i = 0; i < 40; i++) {
-    createFloating(
-      Math.random() > 0.5 ? "💗" : "❤️",
-      45 + Math.random() * 10,
-      40 + Math.random() * 20,
-      20 + Math.random() * 25,
-      2 + Math.random() * 2
-    );
-  }
+function checkPassword() {
+    const inputVal = document.getElementById("passInput").value;
+    if(inputVal === SECRET_CODE) {
+        document.getElementById("lockScreen").style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
+        
+        // মিউজিক প্লে করার চেষ্টা
+        const music = document.getElementById("bg-music");
+        music.play().catch(e => console.log("Auto-play restricted"));
+        
+        startFloatingHearts();
+        startCounter();
+    } else {
+        document.getElementById("errorMsg").innerText = "ভুল কোড! আবার চেষ্টা করুন ❌";
+    }
 }
 
-// SPARKLES
-function sparkleExplosion() {
-  for (let i = 0; i < 45; i++) {
-    createFloating(
-      Math.random() > 0.5 ? "✦" : "✨",
-      45 + Math.random() * 10,
-      40 + Math.random() * 20,
-      10 + Math.random() * 15,
-      1.5 + Math.random() * 2
-    );
-  }
+// ২. ব্যাকগ্রাউন্ড মিউজিক টগল
+let isPlaying = true;
+function toggleMusic() {
+    const music = document.getElementById("bg-music");
+    const btn = document.getElementById("musicToggle");
+    if(isPlaying) {
+        music.pause();
+        btn.innerText = "🔇 মিউজিক অন";
+    } else {
+        music.play();
+        btn.innerText = "🎵 মিউজিক অফ";
+    }
+    isPlaying = !isPlaying;
 }
 
-// ROSE PETALS
-function rosePetals() {
-  for (let i = 0; i < 20; i++) {
-    createFloating(
-      "🌹",
-      Math.random() * 100,
-      100,
-      18 + Math.random() * 20,
-      3 + Math.random() * 3
-    );
-  }
+// ৩. ফ্লোটিং হার্ট অ্যানিমেশন জেনারেটর
+function startFloatingHearts() {
+    const container = document.getElementById("floatingHearts");
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("float-heart");
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (Math.random() * 15 + 10) + "px";
+        heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+        container.appendChild(heart);
+        
+        setTimeout(() => {
+            heart.remove();
+        }, 6000);
+    }, 400);
 }
 
-// BUTTERFLIES
-function butterflies() {
-  for (let i = 0; i < 8; i++) {
-    createFloating(
-      "🦋",
-      Math.random() * 100,
-      80 + Math.random() * 20,
-      25 + Math.random() * 15,
-      3 + Math.random() * 2
-    );
-  }
+// ৪. রিলেশনশিপ টাইম কাউন্টার (এখানে আপনার সম্পর্কের শুরুর তারিখ দিন: YYYY-MM-DD)
+const startDate = new Date("2025-01-01T00:00:00");
+
+function startCounter() {
+    const counterDiv = document.getElementById("counter");
+    
+    function update() {
+        const now = new Date();
+        const diff = now - startDate;
+        
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / 1000 / 60) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+        
+        counterDiv.innerHTML = `
+            <div class="time-box"><span>${days}</span><small>দিন</small></div>
+            <div class="time-box"><span>${hours}</span><small>ঘণ্টা</small></div>
+            <div class="time-box"><span>${minutes}</span><small>মিনিট</small></div>
+            <div class="time-box"><span>${seconds}</span><small>সেকেন্ড</small></div>
+        `;
+    }
+    update();
+    setInterval(update, 1000);
 }
 
-// CREATE ANIMATION
-function createFloating(
-  emoji, x, y, size, duration
-) {
-  const item = document.createElement("div");
-
-  item.className = "floating";
-  item.textContent = emoji;
-
-  item.style.left = x + "vw";
-  item.style.top = y + "vh";
-  item.style.fontSize = size + "px";
-
-  item.style.animationDuration = duration + "s";
-
-  document.body.appendChild(item);
-
-  setTimeout(() => {
-    item.remove();
-  }, duration * 1000 + 100);
+// ৫. পপআপ মোডাল কন্ট্রোল
+function openModal() {
+    document.getElementById("imageModal").style.display = "flex";
 }
 
-// TOUCH HEART
-document.addEventListener("touchstart", (event) => {
-  const touch = event.touches[0];
+function closeModal() {
+    document.getElementById("imageModal").style.display = "none";
+}
 
-  if (!touch) return;
+// বাইরে ক্লিক করলে মোডাল বন্ধ হবে
+window.onclick = function(event) {
+    const modal = document.getElementById("imageModal");
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
 
-  const heart = document.createElement("div");
-
-  heart.textContent = "💗";
-  heart.className = "floating";
-  heart.style.left = touch.clientX + "px";
-  heart.style.top = touch.clientY + "px";
-  heart.style.fontSize = "25px";
-  heart.style.animationDuration = "1.5s";
-
-  document.body.appendChild(heart);
-
-  setTimeout(() => heart.remove(), 1600);
-}, { passive: true });
-
-// 3D HEART TILT
-const heart3D = document.querySelector(".heart-3d");
-
+// ৬. 3D হার্ট টিল্ট এফেক্ট
+const heart3d = document.getElementById("heart3d");
 document.addEventListener("pointermove", (event) => {
-  if (!heart3D) return;
-
-  const x =
-    (event.clientX / window.innerWidth - 0.5) * 20;
-
-  const y =
-    (event.clientY / window.innerHeight - 0.5) * -20;
-
-  heart3D.style.transform =
-    `rotateY(${x}deg) rotateX(${y}deg)`;
+    if (!heart3d) return;
+    const x = (event.clientX / window.innerWidth - 0.5) * 20;
+    const y = (event.clientY / window.innerHeight - 0.5) * -20;
+    heart3d.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
 });
