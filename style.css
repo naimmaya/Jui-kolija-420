@@ -889,3 +889,66 @@ h1{
   }
 
 }
+/* PHOTO POPUP */
+
+.popup {
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 25px 20px;
+}
+
+.popup h2 {
+  margin-bottom: 18px;
+}
+
+.photo-frame {
+  width: 100%;
+  max-width: 300px;
+  margin: auto;
+  padding: 7px;
+  border-radius: 22px;
+
+  background: linear-gradient(
+    135deg,
+    #ff008c,
+    #ffffff,
+    #ff42ad
+  );
+
+  box-shadow:
+    0 0 20px #ff008c,
+    0 0 45px #ff1593;
+
+  animation: photoGlow 2s infinite alternate;
+}
+
+.photo-frame img {
+  display: block;
+  width: 100%;
+  max-height: 55vh;
+  object-fit: contain;
+  border-radius: 16px;
+}
+
+@keyframes photoGlow {
+  from {
+    box-shadow: 0 0 15px #ff008c;
+  }
+  to {
+    box-shadow: 0 0 35px #ff42ad;
+  }
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 35px;
+  height: 35px;
+  border: none;
+  border-radius: 50%;
+  background: #ff168f;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
