@@ -442,3 +442,10 @@ document.addEventListener(
       `rotateY(${x}deg) rotateX(${y}deg)`;
   }
 );
+// CLOSE POPUP
+
+const closeBtn = document.getElementById("closeBtn");
+
+closeBtn.addEventListener("click", () => {
+  popup.classList.remove("show");
+});
