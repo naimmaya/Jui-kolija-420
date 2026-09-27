@@ -1,16 +1,28 @@
-// ওয়েবসাইট লোড হওয়ার সাথে সাথেই সব ইফেক্ট চালু হবে
-window.onload = function() {
-    const music = document.getElementById("bg-music");
-    music.play().then(() => {
-        document.querySelector(".music-player-btn").classList.add("playing");
-        document.getElementById("musicText").innerText = "মিউজিক অন";
-    }).catch(e => console.log("Auto-play restricted"));
+// ১. পাসওয়ার্ড চেক করার ফাংশন
+function checkPassword() {
+    const inputVal = document.getElementById("passInput").value.trim().toLowerCase();
+    const errorMsg = document.getElementById("errorMsg");
     
-    startHeartRain();
-    startCounter();
-};
+    // পাসওয়ার্ড হিসেবে "jui kolija" বা "জুই কলিজা" দেওয়া যাবে
+    if(inputVal === "jui kolija" || inputVal === "জুই কলিজা") {
+        document.getElementById("lockScreen").style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
+        
+        // মিউজিক ও ইফেক্ট চালু করা
+        const music = document.getElementById("bg-music");
+        music.play().then(() => {
+            document.querySelector(".music-player-btn").classList.add("playing");
+            document.getElementById("musicText").innerText = "মিউজিক অন";
+        }).catch(e => console.log("Auto-play restricted"));
+        
+        startHeartRain();
+        startCounter();
+    } else {
+        errorMsg.innerText = "ভুল নাম বা পাসওয়ার্ড! আবার চেষ্টা করুন ❌";
+    }
+}
 
-// ১. ব্যাকগ্রাউন্ড মিউজিক টগল ও ডিস্ক অ্যানিমেশন
+// ২. ব্যাকগ্রাউন্ড মিউজিক টগল ও ডিস্ক অ্যানিমেশন
 let isPlaying = true;
 function toggleMusic() {
     const music = document.getElementById("bg-music");
@@ -29,7 +41,7 @@ function toggleMusic() {
     isPlaying = !isPlaying;
 }
 
-// ২. লাভ রেইন (উপর থেকে নিচে হার্ট পড়ার ইফেক্ট)
+// ৩. লাভ রেইন (উপর থেকে নিচে হার্ট পড়ার ইফেক্ট)
 function startHeartRain() {
     const container = document.getElementById("rainContainer");
     setInterval(() => {
@@ -47,7 +59,7 @@ function startHeartRain() {
     }, 300);
 }
 
-// ৩. রিলেশনশিপ টাইম কাউন্টার (সম্পর্কের শুরুর তারিখ: YYYY-MM-DD)
+// ৪. রিলেশনশিপ টাইম কাউন্টার (সম্পর্কের শুরুর তারিখ: YYYY-MM-DD)
 const startDate = new Date("2025-01-01T00:00:00");
 
 function startCounter() {
@@ -73,7 +85,7 @@ function startCounter() {
     setInterval(update, 1000);
 }
 
-// ৪. মিনি লাভ কুইজ লজিক
+// ৫. মিনি লাভ কুইজ লজিক
 function answerQuiz(option) {
     const resultText = document.getElementById("quizResult");
     if(option === 1) {
@@ -85,7 +97,7 @@ function answerQuiz(option) {
     }
 }
 
-// ৫. রেন্ডম লাভ কোট জেনারেটর
+// ৬. রেন্ডম লাভ কোট জেনারেটর
 const quotes = [
     "\"তুমি আমার হাসির কারণ, আমার আনন্দের কারণ! ❤️\"",
     "\"তোমার সাথে কাটানো প্রতিটি মুহূর্ত আমার জীবনের সেরা মুহূর্ত। 🌸\"",
@@ -99,7 +111,7 @@ function changeQuote() {
     document.getElementById("loveQuote").innerText = quotes[randomIndex];
 }
 
-// ৬. পপআপ মোডাল কন্ট্রোল
+// ৭. পপআপ মোডাল কন্ট্রোল
 function openModal() {
     document.getElementById("imageModal").style.display = "flex";
 }
@@ -115,7 +127,7 @@ window.onclick = function(event) {
     }
 }
 
-// ৭. 3D হার্ট টিল্ট এফেক্ট
+// ৮. 3D হার্ট টিল্ট এফেক্ট
 const heart3d = document.getElementById("heart3d");
 document.addEventListener("pointermove", (event) => {
     if (!heart3d) return;
